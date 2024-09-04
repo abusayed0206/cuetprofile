@@ -1,7 +1,7 @@
 // src/app/api/check-student-id/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/utils/supabase/server'; // Import your custom Supabase client
+import { createClient } from '@/utils/supabase/client'; // Import the browser client
 
 export async function POST(req: NextRequest) {
   // Initialize the Supabase client using your custom connector
