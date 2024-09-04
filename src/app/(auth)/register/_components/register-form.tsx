@@ -40,7 +40,7 @@ const RegisterForm = () => {
   const fetchEmailByStudentId = async (studentid: string) => {
     setLoading(true);
     try {
-      const res = await fetch("https://cuet.sayed.page/api/check-student-id", {
+      const res = await fetch("/api/idcheck", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
