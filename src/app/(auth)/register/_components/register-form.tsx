@@ -12,7 +12,7 @@ import toast from "react-hot-toast";
 import { z } from "zod";
 
 export const registerFormSchema = z.object({
-  studentid: z.string().min(7, "Student ID is required."),
+  studentid: z.string().min(7, "Student ID must be 7 digits."),
   email: z.string().email(),
   password: z.string().min(8, {
     message: "Password must be at least 8 characters.",
@@ -89,6 +89,7 @@ const RegisterForm = () => {
           label="Student ID"
           name="studentid"
           placeholder="Enter your Student ID"
+          type="number"
           description=""
           required
           onBlur={(e) => fetchEmailByStudentId(e.target.value)}
@@ -102,6 +103,7 @@ const RegisterForm = () => {
           placeholder="hello@sarathadhi.com"
           description=""
           required
+          readOnly // Prevents user from editing the email field
         />
 
         <InputForm
