@@ -1,5 +1,5 @@
 import { createClient } from "@/utils/supabase/server";
-import Image from "next/image";
+import ProfileImage from "@/components/ProfileImage";
 
 const ProfilePage = async () => {
   const supabase = createClient();
@@ -32,25 +32,13 @@ const ProfilePage = async () => {
     );
   }
 
-  // Function to handle fallback image if dplink is not available
-  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    event.currentTarget.src = "https://cdn.abusayed.dev/demo.png";
-  };
-
   return (
     <div className="space-y-3">
       <h3>Profile Page</h3>
 
       <div>
         <strong>Profile Picture:</strong>
-        <div className="w-32 h-32">
-          <img
-            src={data.dplink}
-            alt="Profile Picture"
-            onError={handleImageError}
-            className="w-full h-full object-cover rounded-full"
-          />
-        </div>
+        <ProfileImage src={data.dplink} />
       </div>
 
       <p>
