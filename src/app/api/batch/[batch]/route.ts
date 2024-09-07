@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { supabaseServer } from '@/lib/supabase';
+import { createClient } from "@/utils/supabase/server";
 
 export async function GET(
   request: Request,
@@ -9,7 +9,8 @@ export async function GET(
 
   try {
     // Get all students for the batch
-    const { data: batchData, error: batchError } = await supabaseServer
+    const client = createClient();
+    const { data: batchData, error: batchError } = await client
       .from('apidata')
       .select('department, session')
       .eq('batch', batchNumber);
