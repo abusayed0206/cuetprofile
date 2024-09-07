@@ -1,4 +1,4 @@
-import Footer from "@/components//footer";
+
 import Navbar from "@/components//navbar";
 
 export default function RootLayout({
@@ -12,7 +12,7 @@ export default function RootLayout({
 
       <main className="container p-4 sm:p-6 flex-1">{children}</main>
 
-      <Footer />
+
     </>
   );
 }

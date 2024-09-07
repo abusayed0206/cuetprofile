@@ -24,21 +24,10 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: [
     "Next.js",
-    "Nextjs 14",
-    "React",
-    "Tailwind CSS",
-    "Server Components",
-    "Radix UI",
-    "Shadcn UI",
-    "Basic Nextjs template",
+
   ],
-  authors: [
-    {
-      name: "Sarath Adhithya",
-      url: "https://sarathadhi.com",
-    },
-  ],
-  creator: "Sarath Adhithya",
+
+
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -48,13 +37,7 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [siteConfig.ogImage],
   },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
-    description: siteConfig.description,
-    images: [siteConfig.ogImage],
-    creator: "@AdhithyaSarath",
-  },
+
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",

@@ -53,7 +53,7 @@ const LoginForm = () => {
         <InputForm
           label="Email"
           name="email"
-          placeholder="hello@sarathadhi.com"
+          placeholder="hello@sayed.page"
           description=""
           required
         />

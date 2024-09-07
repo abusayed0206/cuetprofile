@@ -12,7 +12,6 @@ import toast from "react-hot-toast";
 import { z } from "zod";
 
 export const registerFormSchema = z.object({
-  studentid: z.string().min(7, "Student ID must be 7 digits."),
   email: z.string().email(),
   password: z.string().min(8, {
     message: "Password must be at least 8 characters.",
@@ -22,13 +21,12 @@ export const registerFormSchema = z.object({
 type RegisterValuesType = z.infer<typeof registerFormSchema>;
 
 const defaultValues: RegisterValuesType = {
-  studentid: "",
   email: "",
   password: "",
 };
 
 const RegisterForm = () => {
-  const [loading, setLoading] = useState(false); // State to manage loader
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
   const supabase = createClient();
 
@@ -37,32 +35,39 @@ const RegisterForm = () => {
     defaultValues,
   });
 
-  const fetchEmailByStudentId = async (studentid: string) => {
+  const checkEmailExists = async (email: string) => {
     setLoading(true);
     try {
-      const res = await fetch("/api/idcheck", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ studentid }),
-      });
+      const { data, error } = await supabase
+        .from("apidata")
+        .select("email")
+        .eq("email", email)
+        .single();
 
-      const data = await res.json();
-
-      if (res.ok) {
-        form.setValue("email", data.email);
-      } else {
-        toast.error(data.message || "Error fetching email.");
+      if (error) {
+        throw error;
       }
+
+      if (!data) {
+        toast.error("You are not a CUET student.");
+        form.setError("email", { message: "You are not a CUET student." });
+        return false;
+      }
+
+      return true;
     } catch (error) {
-      toast.error("An error occurred while fetching the email.");
+      console.error("Error checking email:", error);
+      toast.error("An error occurred while checking your email.");
+      return false;
     } finally {
       setLoading(false);
     }
   };
 
   async function handleRegister(values: RegisterValuesType) {
+    const isValidEmail = await checkEmailExists(values.email);
+    if (!isValidEmail) return;
+
     const { error, data } = await supabase.auth.signUp({
       ...values,
       options: {
@@ -73,9 +78,7 @@ const RegisterForm = () => {
     if (error) return toast.error(error.message);
 
     console.log({ data });
-
     toast.success("Verification email sent. Check your mail.");
-
     router.replace("/email-verify");
   }
 
@@ -86,26 +89,12 @@ const RegisterForm = () => {
         className="w-full flex flex-col gap-y-4"
       >
         <InputForm
-          label="Student ID"
-          name="studentid"
-          placeholder="Enter your Student ID"
-          type="number"
-          description=""
-          required
-          onBlur={(e) => fetchEmailByStudentId(e.target.value)}
-        />
-
-        {loading && <p>Loading email...</p>} {/* Loader */}
-
-        <InputForm
           label="Email"
           name="email"
-          placeholder="hello@sarathadhi.com"
+          placeholder="hello@example.com"
           description=""
           required
-          readOnly // Prevents user from editing the email field
         />
-
         <InputForm
           type="password"
           label="Password"
@@ -113,8 +102,9 @@ const RegisterForm = () => {
           description=""
           required
         />
-
-        <Button disabled={loading}>Register</Button>
+        <Button disabled={loading}>
+          {loading ? "Checking..." : "Register"}
+        </Button>
       </form>
     </Form>
   );

@@ -1,90 +1,72 @@
 import { createClient } from "@/utils/supabase/server";
 import ProfileImage from "@/components/ProfileImage";
+import Link from "next/link";
+import EditProfileClientComponent from "@/components/EditProfileClientComponent";
+import { redirect } from "next/navigation";
 
 const ProfilePage = async () => {
   const supabase = createClient();
-
-  // Get the authenticated user's email from the session
+  
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
+  
   if (!user) {
-    return (
-      <div>
-        <p>User not authenticated.</p>
-      </div>
-    );
+    redirect('/login');
+    return null;
   }
-
-  // Fetch the user's data from the apidata table using the email
+  
   const { data, error } = await supabase
     .from("apidata")
     .select("name, studentid, uniqueid, email, dplink, linkedin, batch, session, department, admissionroll, admissionmerit, hall, bloodgroup, phonenumber, currentstatus")
     .eq("email", user.email)
     .single();
-
+  
   if (error || !data) {
     return (
-      <div>
+      <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg">
         <p>Error fetching profile data.</p>
       </div>
     );
   }
-
+  
   return (
-    <div className="space-y-3">
-      <h3>Profile Page</h3>
-
-      <div>
-        <strong>Profile Picture:</strong>
-        <ProfileImage src={data.dplink} />
+    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg space-y-6">
+      <h1 className="text-3xl font-bold text-gray-800 mb-6">Profile Page</h1>
+      
+      <div className="bg-gray-100 p-6 rounded-lg">
+        <div className="relative mb-4">
+          <strong className="block text-lg text-black mb-2">Profile Picture:</strong>
+          <ProfileImage src={data.dplink} />
+          <Link href="/dpupload" target="_blank" className="absolute top-0 right-0 bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition duration-300">
+            Edit DP
+          </Link>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <InfoItem label="Name" value={data.name} />
+          <InfoItem label="Student ID" value={data.studentid} />
+          <InfoItem label="Email" value={data.email} />
+          <InfoItem label="Batch" value={data.batch} />
+          <InfoItem label="Session" value={data.session} />
+          <InfoItem label="Department" value={data.department} />
+          <InfoItem label="Admission Roll" value={data.admissionroll} />
+          <InfoItem label="Admission Merit" value={data.admissionmerit} />
+        </div>
       </div>
-
-      <p>
-        <strong>Name:</strong> {data.name}
-      </p>
-      <p>
-        <strong>Student ID:</strong> {data.studentid}
-      </p>
-      <p>
-        <strong>Unique ID:</strong> {data.uniqueid}
-      </p>
-      <p>
-        <strong>Email:</strong> {data.email}
-      </p>
-      <p>
-        <strong>LinkedIn:</strong> {data.linkedin}
-      </p>
-      <p>
-        <strong>Batch:</strong> {data.batch}
-      </p>
-      <p>
-        <strong>Session:</strong> {data.session}
-      </p>
-      <p>
-        <strong>Department:</strong> {data.department}
-      </p>
-      <p>
-        <strong>Admission Roll:</strong> {data.admissionroll}
-      </p>
-      <p>
-        <strong>Admission Merit:</strong> {data.admissionmerit}
-      </p>
-      <p>
-        <strong>Hall:</strong> {data.hall}
-      </p>
-      <p>
-        <strong>Blood Group:</strong> {data.bloodgroup}
-      </p>
-      <p>
-        <strong>Phone Number:</strong> {data.phonenumber}
-      </p>
-      <p>
-        <strong>Current Status:</strong> {data.currentstatus}
-      </p>
+      
+      <div className="bg-gray-100 p-6 rounded-lg">
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Edit Your Data</h2>
+        <EditProfileClientComponent initialData={data} />
+      </div>
     </div>
   );
 };
+
+const InfoItem = ({ label, value }: { label: string; value: string }) => (
+  <p className="mb-2">
+    <strong className="font-semibold text-gray-700">{label}:</strong> {value}
+  </p>
+);
 
 export default ProfilePage;

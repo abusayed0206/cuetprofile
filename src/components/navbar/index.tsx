@@ -25,8 +25,8 @@ const Navbar = async () => {
     <header className="w-full">
       <div className="container p-4 sm:px-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <Lock />
-          <h5 className="mt-0.5">Next Level Auth</h5>
+
+          <h5 className="mt-0.5">CUET Profile</h5>
         </Link>
 
         <div className="flex items-center gap-3">
