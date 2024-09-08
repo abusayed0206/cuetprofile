@@ -63,6 +63,8 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
     'Tapashi Rabeya Hall',
   ];
 
+  const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6 bg-gray-100 p-6 rounded-lg shadow-md">
       {/* Current Status */}
@@ -97,15 +99,22 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
       <div className="flex flex-col">
         <label className="mb-2 text-gray-800 font-semibold">
           Blood Group:
-          <input
-            type="text"
+          <select
             name="bloodGroup"
             value={formData.bloodGroup}
             onChange={handleChange}
             className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-gray-900 font-medium"
-          />
+          >
+            <option value="">Select your Blood Group</option>
+            {bloodGroups.map((group) => (
+              <option key={group} value={group}>
+                {group}
+              </option>
+            ))}
+          </select>
         </label>
       </div>
+  
 
       {/* Hall */}
       <div className="flex flex-col">
@@ -144,7 +153,7 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
       {/* Unique ID */}
       <div className="flex flex-col">
         <label className="mb-2 text-gray-800 font-semibold">
-          Unique ID:
+          Unique ID(Student ID Card):
           <input
             type="text"
             name="uniqueId"
