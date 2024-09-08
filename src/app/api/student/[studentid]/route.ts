@@ -13,7 +13,7 @@ export async function GET(
     const { data, error } = await client
       .from('apidata')
       .select(
-        'name, studentid, uniqueid, batch, session, department, admissionroll, admissionmerit, hall, public_email, bloodgroup, dplink, currentstatus, linkedin'
+        'name, studentid, uniqueid, batch, session, department, admissionroll, admissionmerit, hall, phonenumber, public_email, bloodgroup, dplink, currentstatus, linkedin'
       ) 
       .eq('studentid', studentId)
       .single();

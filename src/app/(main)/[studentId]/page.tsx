@@ -14,6 +14,7 @@ interface StudentData {
   admissionmerit: string;
   hall: string;
   public_email: string;
+  phonenumber: string;
   bloodgroup: string;
   linkedin: string;
   dplink: string;
@@ -76,6 +77,10 @@ const StudentDetails: React.FC<StudentDetailsProps> = ({ data }) => {
         <div>
           <span className="text-gray-700">Hall: </span>
           <span className="font-bold text-black">{data.hall}</span>
+        </div>
+        <div>
+          <span className="text-gray-700">Phone Number: </span>
+          <span className="font-bold text-black">{data.phonenumber}</span>
         </div>
         <div>
           <span className="text-gray-700">Public Email: </span>
