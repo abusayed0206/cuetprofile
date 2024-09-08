@@ -12,17 +12,19 @@ interface EditProfileClientComponentProps {
     hall: string;
     linkedin: string;
     uniqueid: string;
+    public_email: string;
   };
 }
 
 const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({ initialData }) => {
   const [formData, setFormData] = useState({
-    currentStatus: initialData.currentstatus || "",
-    phoneNumber: initialData.phonenumber || "",
-    bloodGroup: initialData.bloodgroup || "",
-    hall: initialData.hall || "",
-    linkedin: initialData.linkedin || "",
-    uniqueId: initialData.uniqueid || "",
+    currentStatus: initialData.currentstatus || '',
+    phoneNumber: initialData.phonenumber || '',
+    bloodGroup: initialData.bloodgroup || '',
+    hall: initialData.hall || '',
+    linkedin: initialData.linkedin || '',
+    uniqueId: initialData.uniqueid || '',
+    public_email: initialData.public_email || '',  // Ensure this is initialized correctly
   });
 
   const router = useRouter();
@@ -51,18 +53,19 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
   };
 
   const halls = [
-    "Shaheed Mohammad Shah Hall",
-    "Dr. Qudrat-E-Khuda Hall",
-    "Bangabandhu Hall",
-    "Shaheed Tareq Huda Hall",
-    "Sheikh Russel Hall",
-    "Sufia Kamal Hall",
-    "Shamsunnahar Khan Hall",
-    "Tapashi Rabeya Hall",
+    'Shaheed Mohammad Shah Hall',
+    'Dr. Qudrat-E-Khuda Hall',
+    'Bangabandhu Hall',
+    'Shaheed Tareq Huda Hall',
+    'Sheikh Russel Hall',
+    'Sufia Kamal Hall',
+    'Shamsunnahar Khan Hall',
+    'Tapashi Rabeya Hall',
   ];
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6 bg-gray-100 p-6 rounded-lg shadow-md">
+      {/* Current Status */}
       <div className="flex flex-col">
         <label className="mb-2 text-gray-800 font-semibold">
           Current Status:
@@ -75,6 +78,8 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
           />
         </label>
       </div>
+
+      {/* Phone Number */}
       <div className="flex flex-col">
         <label className="mb-2 text-gray-800 font-semibold">
           Phone Number:
@@ -87,6 +92,8 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
           />
         </label>
       </div>
+
+      {/* Blood Group */}
       <div className="flex flex-col">
         <label className="mb-2 text-gray-800 font-semibold">
           Blood Group:
@@ -99,6 +106,8 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
           />
         </label>
       </div>
+
+      {/* Hall */}
       <div className="flex flex-col">
         <label className="mb-2 text-gray-800 font-semibold">
           Hall:
@@ -117,6 +126,8 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
           </select>
         </label>
       </div>
+
+      {/* LinkedIn */}
       <div className="flex flex-col">
         <label className="mb-2 text-gray-800 font-semibold">
           LinkedIn:
@@ -129,6 +140,8 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
           />
         </label>
       </div>
+
+      {/* Unique ID */}
       <div className="flex flex-col">
         <label className="mb-2 text-gray-800 font-semibold">
           Unique ID:
@@ -141,6 +154,21 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
           />
         </label>
       </div>
+
+      {/* Public Email */}
+      <div className="flex flex-col">
+        <label className="mb-2 text-gray-800 font-semibold">
+          Public Email:
+          <input
+            type="email"
+            name="public_email"
+            value={formData.public_email}
+            onChange={handleChange}
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-gray-900 font-medium"
+          />
+        </label>
+      </div>
+
       <button type="submit" className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 font-semibold w-full">
         Update Profile
       </button>

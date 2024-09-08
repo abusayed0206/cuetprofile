@@ -116,7 +116,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 py-6 flex flex-col justify-center items-center">
+    <div className="min-h-screen  py-6 flex flex-col justify-center items-center">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
         <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-cyan-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 rounded-3xl"></div>
         <div className="relative px-4 py-10 bg-slate-300 shadow-lg rounded-3xl sm:p-20">

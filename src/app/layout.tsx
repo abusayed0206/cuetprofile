@@ -45,11 +45,11 @@ export const metadata: Metadata = {
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
   robots: {
-    index: true,
-    follow: true,
+    index: false,
+    follow: false,
     googleBot: {
-      index: true,
-      follow: true,
+      index: false,
+      follow: false,
     },
   },
 };

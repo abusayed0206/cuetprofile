@@ -1,69 +1,23 @@
-# Next Level Auth
+# 📚 EDIT Student Details
 
-Next.js 14 - @supabase/ssr
+This project is based on the template found [here](https://github.com/SarathAdhi/next-supabase-auth).
 
-## About
+## 🔄 Changes
 
-This is a Starter Template
+In the dynamic route `/[studentid]`, Supabase is called directly instead of using an API.
 
-Every line of code is open source, offering a collaborative learning experience. Join us on this coding journey and contribute to the future of web development!
+## 🤝 Contribution
 
-# Features
+Your contributions are welcome! Here’s how you can help:
 
-- Nextjs 14 (latest)
-- App router
-- Supabase
-- Supabase with Authentication
-- Dark, Light and System - Color theme mode
-- SEO Optimized
-- Styled using **Tailwind CSS**
-- UI Components built using **Shadcn UI (Radix UI)**
-- Validations using **Zod**
-- Written in **TypeScript**
+- **Beautify the Code**: Feel free to enhance the code's appearance and structure.
+- **Maintain the Project**: Contact me at [sayed.page/contact](https://sayed.page/contact) from your academic email, and I'll grant you direct write permissions to this repository. Alternatively, you can open a pull request (PR).
 
-## Getting Started
+If you add new features, please create a new branch and submit a PR. This helps keep the project organized.
 
-1. Install dependencies using pnpm:
+You can also contribute to the public site repository: [github.com/abusayed0206/cuetapi](https://github.com/abusayed0206/cuetapi).
 
-```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
-```
+## ⚠️ Disclaimer
 
-<br />
+The code in this repository, including the public repo, might contain errors, typos, or logical issues. As I am not from a CS background, and have utilized multiple AI assistants like GitHub Copilot, ClaudeAI, and ChatGPT for coding, please forgive any mistakes and contribute by submitting PRs to help improve the project.
 
-2. Copy `.env.example` to `.env.local` and update the environment variables.
-
-<br />
-
-3. Start the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-<br />
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/(main)/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

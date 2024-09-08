@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
+import { FaEye, FaEyeSlash } from "react-icons/fa"; // Import eye icons
 
 export const registerFormSchema = z.object({
   email: z.string().email(),
@@ -27,6 +28,7 @@ const defaultValues: RegisterValuesType = {
 
 const RegisterForm = () => {
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // State for password visibility
   const router = useRouter();
   const supabase = createClient();
 
@@ -91,17 +93,33 @@ const RegisterForm = () => {
         <InputForm
           label="Email"
           name="email"
-          placeholder="hello@example.com"
+          placeholder="u1901049@student.cuet.ac.bd"
           description=""
           required
         />
-        <InputForm
-          type="password"
-          label="Password"
-          name="password"
-          description=""
-          required
-        />
+        <div className="relative flex items-center">
+          <label className="flex-1 text-sm font-medium text-gray-700">
+          </label>
+          <button
+            type="button"
+            className="absolute inset-y-0 right-3 flex items-center"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? (
+              <FaEyeSlash className="text-gray-500 h-6 w-6" />
+            ) : (
+              <FaEye className="text-gray-500 h-6 w-6" />
+            )}
+          </button>
+          <InputForm
+            type={showPassword ? "text" : "password"}
+            name="password"
+            description=""
+            required
+            label="Password"
+            className="pl-12" // Add padding to the left to make space for the icon
+          />
+        </div>
         <Button disabled={loading}>
           {loading ? "Checking..." : "Register"}
         </Button>

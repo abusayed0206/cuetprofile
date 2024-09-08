@@ -66,7 +66,7 @@ export default function UploadForm({ initialStudentId }: UploadFormProps) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-r from-blue-400 to-purple-500 p-4">
+    <div className="flex flex-col justify-center items-center min-h-screen  p-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-4 md:p-6 mx-2 mb-3">
         <h2 className="text-2xl font-bold mb-4 text-center text-gray-900">DP UPLOAD</h2>
         <p className="text-center mb-4 text-gray-700">

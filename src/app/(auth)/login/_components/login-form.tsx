@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { InputForm } from "@/components/ui/input/input-form";
@@ -9,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export const loginFormSchema = z.object({
   email: z.string().email(),
@@ -25,6 +27,7 @@ const defaultValues: LoginValuesType = {
 };
 
 const LoginForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
   const supabase = createClient();
@@ -58,13 +61,22 @@ const LoginForm = () => {
           required
         />
 
-        <InputForm
-          type="password"
-          label="Password"
-          name="password"
-          description=""
-          required
-        />
+        <div className="relative">
+          <InputForm
+            type={showPassword ? "text" : "password"}
+            label="Password"
+            name="password"
+            description=""
+            required
+          />
+          <button
+            type="button"
+            className="absolute right-3 top-1/2 transform -translate-y-1/2"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
+          </button>
+        </div>
 
         <Button>Login</Button>
       </form>
