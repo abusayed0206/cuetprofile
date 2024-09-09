@@ -51,7 +51,7 @@ export default function UploadForm({ initialStudentId }: UploadFormProps) {
         setFile(null);
         setPreview(null);
         setTimeout(() => {
-          router.push(`https://cuet.sayed.page/${initialStudentId}`);
+          router.push(`https://cuetprofile.sayed.page/${initialStudentId}`);
         }, 3000);
       } else {
         const result = await response.json();
@@ -66,16 +66,15 @@ export default function UploadForm({ initialStudentId }: UploadFormProps) {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen  p-4">
+    <div className="flex flex-col justify-center items-center min-h-screen p-4">
       <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-4 md:p-6 mx-2 mb-3">
         <h2 className="text-2xl font-bold mb-4 text-center text-gray-900">DP UPLOAD</h2>
         <p className="text-center mb-4 text-gray-700">
-          To resize image click <a href="https://ezgif.com/resize" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">here</a><br />
-          To convert image to webp click <a href="https://ezgif.com/png-to-webp" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">here(PNG)</a> or <a href="https://ezgif.com/jpg-to-webp" className="text-blue-500 underline" target="_blank" rel="noopener noreferrer">here(JPG)</a>
+          Please try to upload square photo for better view.
         </p>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="flex flex-col">
-            <label htmlFor="id" className="text-sm font-medium text-gray-700">
+        <form onSubmit={handleSubmit} className="space-y-4 flex flex-col items-center">
+          <div className="flex flex-col items-center w-full">
+            <label htmlFor="id" className="text-center text-sm font-medium text-gray-700">
               CUET ID
             </label>
             <input
@@ -84,20 +83,20 @@ export default function UploadForm({ initialStudentId }: UploadFormProps) {
               value={initialStudentId}
               readOnly
               disabled
-              className="mt-1 text-black block w-auto rounded-md border-gray-300 bg-gray-100 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 cursor-not-allowed"
+              className="mt-1 text-black w-full max-w-[200px] rounded-md border-gray-300 bg-gray-100 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 cursor-not-allowed text-center"
             />
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="file" className="text-sm font-medium text-gray-700">
-              Photo (WebP format, max 200KB, square image)
+          <div className="flex flex-col items-center w-full">
+            <label htmlFor="file" className="text-sm text-center font-medium text-gray-700">
+              Photo (max 300KB)
             </label>
             <input
               type="file"
               id="file"
               onChange={handleFileChange}
-              accept="image/webp"
+              accept="image/*"
               required
-              className="mt-1 block w-auto text-sm text-gray-500
+              className="mt-1 text-center w-full max-w-[200px] text-sm text-gray-500
                 file:mr-2 file:py-1 file:px-2
                 file:rounded-full file:border-0
                 file:text-sm file:font-semibold
@@ -106,14 +105,14 @@ export default function UploadForm({ initialStudentId }: UploadFormProps) {
             />
           </div>
           {preview && (
-            <div className="mt-4">
-              <img src={preview} alt="Preview" className="max-w-full h-auto rounded-lg" />
+            <div className="mt-4 flex justify-center">
+              <img src={preview} alt="Preview" className="max-w-full h-auto rounded-lg" style={{ maxHeight: '200px' }} />
             </div>
           )}
           <button
             type="submit"
             disabled={uploading}
-            className={`w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${uploading ? 'bg-gray-500 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-300`}
+            className={`w-full max-w-[200px] py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${uploading ? 'bg-gray-500 cursor-not-allowed' : 'bg-indigo-600 hover:bg-indigo-700'} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-300`}
           >
             {uploading ? (
               <div className="flex items-center justify-center">
