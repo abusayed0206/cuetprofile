@@ -18,7 +18,7 @@ const ProfilePage = async () => {
 
   const { data, error } = await supabase
     .from("apidata")
-    .select("name, studentid, uniqueid, email, public_email, dplink, linkedin, batch, session, department, admissionroll, admissionmerit, hall, bloodgroup, phonenumber, currentstatus")
+    .select("name, studentid, uniqueid, email, public_email, dplink, linkedin, batch, session, department, admissionroll, admissionmerit, hall, bloodgroup, phonenumber, currentstatus, photographer, intro, portfolio, instagram, facebook, playbook, playboard")
     .eq("email", user.email)
     .single();
 
@@ -55,7 +55,7 @@ const ProfilePage = async () => {
       </div>
 
       <div className="bg-gray-100 p-6 rounded-lg">
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">Edit Your Data</h2>
+        <h2 className="text-2xl text-center font-semibold text-gray-800 mb-4">Edit Your Data</h2>
         <EditProfileClientComponent initialData={data} />
       </div>
     </div>

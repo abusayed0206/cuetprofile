@@ -1,4 +1,3 @@
-// src/components/EditProfileClientComponent.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -13,6 +12,13 @@ interface EditProfileClientComponentProps {
     linkedin: string;
     uniqueid: string;
     public_email: string;
+    // Added fields for photography
+    intro?: string;
+    portfolio?: string;
+    instagram?: string;
+    facebook?: string;
+    playbook?: string;
+    playboard?: string;
   };
 }
 
@@ -25,11 +31,17 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
     linkedin: initialData.linkedin || '',
     uniqueId: initialData.uniqueid || '',
     public_email: initialData.public_email || '',  // Ensure this is initialized correctly
+    intro: initialData.intro || '', // Added fields for photography
+    portfolio: initialData.portfolio || '',
+    instagram: initialData.instagram || '',
+    facebook: initialData.facebook || '',
+    playbook: initialData.playbook || '',
+    playboard: initialData.playboard || '',
   });
 
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -66,44 +78,47 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
   const bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-gray-100 p-6 rounded-lg shadow-md">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col items-center justify-center space-y-6 bg-gray-100 p-6 rounded-lg shadow-md max-w-md mx-auto"
+    >
       {/* Current Status */}
-      <div className="flex flex-col">
-        <label className="mb-2 text-gray-800 font-semibold">
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
           Current Status:
           <input
             type="text"
             name="currentStatus"
             value={formData.currentStatus}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-gray-900 font-medium"
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
           />
         </label>
       </div>
 
       {/* Phone Number */}
-      <div className="flex flex-col">
-        <label className="mb-2 text-gray-800 font-semibold">
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
           Phone Number:
           <input
             type="text"
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-gray-900 font-medium"
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
           />
         </label>
       </div>
 
       {/* Blood Group */}
-      <div className="flex flex-col">
-        <label className="mb-2 text-gray-800 font-semibold">
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
           Blood Group:
           <select
             name="bloodGroup"
             value={formData.bloodGroup}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-gray-900 font-medium"
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
           >
             <option value="">Select your Blood Group</option>
             {bloodGroups.map((group) => (
@@ -114,17 +129,16 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
           </select>
         </label>
       </div>
-  
 
       {/* Hall */}
-      <div className="flex flex-col">
-        <label className="mb-2 text-gray-800 font-semibold">
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
           Hall:
           <select
             name="hall"
             value={formData.hall}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-gray-900 font-medium"
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
           >
             <option value="">Select your Hall</option>
             {halls.map((hall) => (
@@ -137,52 +151,138 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
       </div>
 
       {/* LinkedIn */}
-      <div className="flex flex-col">
-        <label className="mb-2 text-gray-800 font-semibold">
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
           LinkedIn:
           <input
             type="text"
             name="linkedin"
             value={formData.linkedin}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-gray-900 font-medium"
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
           />
         </label>
       </div>
 
       {/* Unique ID */}
-      <div className="flex flex-col">
-        <label className="mb-2 text-gray-800 font-semibold">
-          Unique ID(Student ID Card):
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
+          Unique ID (Student ID Card):
           <input
             type="text"
             name="uniqueId"
             value={formData.uniqueId}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-gray-900 font-medium"
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
           />
         </label>
       </div>
 
       {/* Public Email */}
-      <div className="flex flex-col">
-        <label className="mb-2 text-gray-800 font-semibold">
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
           Public Email:
           <input
             type="email"
             name="public_email"
             value={formData.public_email}
             onChange={handleChange}
-            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-gray-900 font-medium"
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
           />
         </label>
       </div>
 
-      <button type="submit" className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 font-semibold w-full">
+      {/* Intro */}
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
+          Intro:
+          <textarea
+            name="intro"
+            value={formData.intro}
+            onChange={handleChange}
+            rows={3}
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
+          />
+        </label>
+      </div>
+
+      {/* Portfolio */}
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
+          Portfolio Link:
+          <input
+            type="text"
+            name="portfolio"
+            value={formData.portfolio}
+            onChange={handleChange}
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
+          />
+        </label>
+      </div>
+
+      {/* Instagram */}
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
+          Instagram Username:
+          <input
+            type="text"
+            name="instagram"
+            value={formData.instagram}
+            onChange={handleChange}
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
+          />
+        </label>
+      </div>
+
+      {/* Facebook */}
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
+          Facebook Username:
+          <input
+            type="text"
+            name="facebook"
+            value={formData.facebook}
+            onChange={handleChange}
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
+          />
+        </label>
+      </div>
+
+      {/* Playbook Username */}
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
+          Playbook Public Profile Link:
+          <input
+            type="text"
+            name="playbook"
+            value={formData.playbook}
+            onChange={handleChange}
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
+          />
+        </label>
+      </div>
+
+      {/* Playbook Board Link */}
+      <div className="flex flex-col items-center w-full">
+        <label className="mb-2 text-black font-semibold text-center">
+          Playbook Board Link (Direct Link):
+          <input
+            type="text"
+            name="playboard"
+            value={formData.playboard}
+            onChange={handleChange}
+            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
+          />
+        </label>
+      </div>
+
+      <button
+        type="submit"
+        className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 font-semibold w-full text-center"
+      >
         Update Profile
       </button>
     </form>
   );
-};
-
-export default EditProfileClientComponent;
+}
+export default EditProfileClientComponent;  

@@ -32,6 +32,10 @@ const Navbar = async () => {
         <div className="flex items-center gap-3">
           {user ? (
             <>
+
+              <Link className="cursor-pointer" href="/profile">
+                Profile
+              </Link>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button size="icon" variant="ghost">
