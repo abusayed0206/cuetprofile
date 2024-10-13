@@ -12,13 +12,11 @@ interface EditProfileClientComponentProps {
     linkedin: string;
     uniqueid: string;
     public_email: string;
-    // Added fields for photography
     intro?: string;
     portfolio?: string;
     instagram?: string;
     facebook?: string;
-    playbook?: string;
-    playboard?: string;
+    images?: string;
   };
 }
 
@@ -30,15 +28,15 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
     hall: initialData.hall || '',
     linkedin: initialData.linkedin || '',
     uniqueId: initialData.uniqueid || '',
-    public_email: initialData.public_email || '',  // Ensure this is initialized correctly
-    intro: initialData.intro || '', // Added fields for photography
+    public_email: initialData.public_email || '',
+    intro: initialData.intro || '',
     portfolio: initialData.portfolio || '',
     instagram: initialData.instagram || '',
     facebook: initialData.facebook || '',
-    playbook: initialData.playbook || '',
-    playboard: initialData.playboard || '',
+    images: initialData.images || '',
   });
 
+  const [loading, setLoading] = useState(false); // Loading state
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -48,6 +46,7 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true); // Start loading animation
     const response = await fetch('/api/update-profile', {
       method: 'POST',
       headers: {
@@ -56,6 +55,7 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
       body: JSON.stringify(formData),
     });
 
+    setLoading(false); // Stop loading animation
     if (response.ok) {
       alert('Profile updated successfully');
       router.refresh();
@@ -248,41 +248,37 @@ const EditProfileClientComponent: React.FC<EditProfileClientComponentProps> = ({
         </label>
       </div>
 
-      {/* Playbook Username */}
-      <div className="flex flex-col items-center w-full">
-        <label className="mb-2 text-black font-semibold text-center">
-          Playbook Public Profile Link:
-          <input
-            type="text"
-            name="playbook"
-            value={formData.playbook}
-            onChange={handleChange}
-            className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
-          />
-        </label>
-      </div>
 
       {/* Playbook Board Link */}
       <div className="flex flex-col items-center w-full">
         <label className="mb-2 text-black font-semibold text-center">
-          Playbook Board Link (Direct Link):
-          <input
-            type="text"
-            name="playboard"
-            value={formData.playboard}
+          Images Link(Max 10, not more than 2 MB each, separated by comma,space or new line,):
+          <textarea
+            name="images"
+            value={formData.images}
             onChange={handleChange}
+            rows={5}
+            placeholder='https://example.com/image1.jpg, https://example.com/image2.jpg'
             className="mt-1 p-2 border border-gray-400 rounded-lg w-full bg-white text-black font-medium text-center"
           />
         </label>
       </div>
 
-      <button
-        type="submit"
-        className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 font-semibold w-full text-center"
-      >
-        Update Profile
-      </button>
+      {!loading ? (
+        <button
+          type="submit"
+          className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 font-semibold w-full text-center"
+        >
+          Update Profile
+        </button>
+      ) : (
+        <div className="flex justify-center items-center">
+          <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
+          <span className="ml-2 text-blue-500 font-semibold">Updating...</span>
+        </div>
+      )}
     </form>
   );
-}
-export default EditProfileClientComponent;  
+};
+
+export default EditProfileClientComponent;

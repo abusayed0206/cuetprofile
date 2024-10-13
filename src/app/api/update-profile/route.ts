@@ -42,12 +42,11 @@ export async function POST(req: Request) {
         linkedin: formData.linkedin,
         uniqueid: formData.uniqueId,
         public_email: formData.public_email,
-        intro: formData.intro, // Added fields for photography
+        intro: formData.intro,
         portfolio: formData.portfolio,
         instagram: formData.instagram,
         facebook: formData.facebook,
-        playbook: formData.playbook,
-        playboard: formData.playboard,
+        images: formData.images,
       })
       .eq("email", user.email);
 
